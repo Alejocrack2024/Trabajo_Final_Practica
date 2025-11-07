@@ -1,9 +1,9 @@
 from django.db import models
+from django.utils import timezone
 import os
 import uuid
 from django.core.exceptions import ValidationError
 from PIL import Image
-from django.utils import timezone
 
 def validate_image_size(image):
     filesize = image.file.size
@@ -34,6 +34,7 @@ class Producto(models.Model):
     )
     fecha_creacion = models.DateTimeField("Fecha de creacion", auto_now_add=True)
     fecha_actualizacion = models.DateTimeField("Fecha de creacion", auto_now=True)
+    sku = models.CharField(max_length=50, unique=True)
 
     
     class Meta:
@@ -89,4 +90,4 @@ class MovimientoStock(models.Model):
 
     def __str__(self):
         """Unicode representation of MovimientoStock."""
-        return f"{self.producto.nombre} - {self.tipo}  - {self.cantidad}" 
+        return f"{self.producto.nombre} {self.tipo} {self.cantidad}" 

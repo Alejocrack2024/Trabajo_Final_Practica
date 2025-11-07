@@ -1,4 +1,4 @@
-{% extends 'productos/base.html' %}
+{% extends 'base.html' %}
 {% load bootstrap4 %}
 
 {% block title %}Lista de Productos{% endblock %}
@@ -62,7 +62,7 @@
                     <div class="btn-group btn-group-sm">
                         <a href="{% url 'productos:producto_detail' producto.pk %}" class="btn btn-info" title="Ver detalle">
                             <i class="fas fa-eye"></i>
-                        </a>
+                        </a>                        
                         <a href="{% url 'productos:producto_update' producto.pk %}" class="btn btn-primary" title="Editar">
                             <i class="fas fa-edit"></i>
                         </a>

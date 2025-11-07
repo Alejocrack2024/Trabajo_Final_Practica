@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    
+    <h2>Información de la Venta</h2>
+    {{ form|crispy }}
+    
+    <h2>Ítems de Venta</h2>
+    {{ formset.management_form }}
+    {% for form in formset %}
+        {{ form|crispy }}
+    {% endfor %}
+    
+    <button type="submit" class="btn btn-primary">Guardar Venta</button>
+</form>
+{% endblock %}

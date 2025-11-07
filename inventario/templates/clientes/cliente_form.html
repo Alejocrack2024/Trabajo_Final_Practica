@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container mt-5">
+    {% if form.instance.pk %}
+        <h1 class="mb-4">Editar Cliente</h1>
+    {% else %}
+        <h1 class="mb-4">Crear Nuevo Cliente</h1>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <a href="{% url 'clientes:cliente_list' %}" class="btn btn-secondary">Cancelar</a>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}Detalle de Venta: {{ venta.codigo_venta }}{% endblock title %}
+
+{% block content %}
+<h1 class="mb-4">🧾 Detalle de Venta: {{ venta.codigo_venta }}</h1>
+
+<div class="card shadow-sm mb-4">
+    <div class="card-body">
+        <p><strong>Cliente:</strong> {{ venta.cliente }}</p>
+        <p><strong>Fecha y Hora:</strong> {{ venta.fecha|date:"d/m/Y H:i" }}</p>
+        <p><strong>Total Comprobante:</strong> <span class="h4 badge bg-success">{{ venta.total|floatformat:2 }} Bs.</span></p>
+    </div>
+    <td>
+        <a href="{% url 'ventas:cliente_delete' pk=venta.pk %}" class="btn btn-sm btn-info">Eliminar</a>
+    </td>
+</div>
+
+<h2 class="mt-4">Productos Vendidos</h2>
+
+{% if venta.items.all %}
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio Unitario (Bs.)</th>
+                <th>Subtotal (Bs.)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in venta.items.all %}
+            <tr>
+                <td>{{ item.producto.nombre }}</td>
+                <td>{{ item.cantidad }}</td>
+                <td>{{ item.precio_unitario|floatformat:2 }}</td>
+                <td>{{ item.subtotal|floatformat:2 }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <div class="alert alert-warning">Esta venta no tiene ítems.</div>
+{% endif %}
+
+<div class="mt-4">
+    <a href="{% url 'ventas:venta_list' %}" class="btn btn-secondary">Volver al Listado</a>
+</div>
+{% endblock content %}

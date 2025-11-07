@@ -22,7 +22,7 @@ class ProductoForm(forms.ModelForm):
         # Vinculamos este formulario al modelo Producto
         model = Producto
         # Especificamos los campos que se incluirán en el formulario
-        fields = ["nombre", "descripcion", "precio", "stock", "stock_minimo", "imagen"]
+        fields = ["nombre", "sku", "descripcion", "stock", "stock_minimo", "precio"]
         # Usamos widgets para personalizar la apariencia de los campos HTML
         widgets = {
             "descripcion": forms.Textarea(attrs={"rows": 3}),  # Cambia el campo de texto a un área de texto más grande

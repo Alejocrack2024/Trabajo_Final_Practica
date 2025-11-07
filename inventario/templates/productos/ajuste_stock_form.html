@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+  <h1>Ajustar Stock de {{ producto.nombre }}</h1>
+  <p>SKU: {{ producto.sku }}</p>
+  <hr>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-info">Guardar Ajuste</button>
+    <a href="{% url 'productos:producto_detail' producto.pk %}" class="btn btn-secondary">Cancelar</a>
+  </form>
+</div>
+{% endblock %}

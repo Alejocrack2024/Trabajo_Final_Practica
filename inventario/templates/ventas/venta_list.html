@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Listado de Ventas{% endblock title %}
+
+{% block content %}
+<h1 class="mb-4">Listado de Ventas</h1>
+
+<a href="{% url 'ventas:venta_create' %}" class="btn btn-primary mb-3"> Nueva Venta</a>
+
+
+{% if ventas %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Cliente</th>
+                <th>Fecha</th>
+                <th>Total (Bs.)</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for venta in ventas %}
+            <tr>
+                <td>{{ venta.codigo_venta }}</td>
+                <td>{{ venta.cliente.nombre }}</td>
+                <td>{{ venta.fecha }}</td>
+                <td>{{ venta.total }}</td>
+                    <a href="{% url 'ventas:venta_confirm_delete' pk=venta.pk %}" class="btn btn-danger">Eliminar</a>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>No hay ventas registradas.</p>
+{% endif %}
+{% endblock %}
